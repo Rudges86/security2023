@@ -1,0 +1,18 @@
+http://localhost:8080/logout → faz o logout da aplicação
+1-Criar uma classe de configuração de segurança
+	pacote config, securityConfig --→ a primeira coisa que o spring security faz é procurar um bean de filtros,
+						    o filterchain.
+Classe de configuração
+@EnableWebSecurity
+public class SecurityConfig {
+//Quando criamos essa config, o spring vai sair da segurança padrão para esta que criamos
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http.authorizeRequests() //Requisições http autorização de requisição
+                .anyRequest() //ta permitindo qualquer requisição
+                .authenticated()//desde que seja autenticada
+                .and()
+                .httpBasic();
+        return http.build();
+    }
+}
